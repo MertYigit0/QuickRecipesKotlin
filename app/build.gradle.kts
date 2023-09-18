@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+
+
 
 }
 
@@ -44,7 +47,9 @@ android {
 dependencies {
 
     val nav_version = "2.7.2"
-
+    val roomVersion = "2.5.2"
+    val  lifecycle_version = "2.6.1"
+    val retrofitVersion = "2.9.0"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -56,12 +61,37 @@ dependencies {
 
 
 
-    // Java language implementation
+    // Navigation
     implementation("androidx.navigation:navigation-fragment:$nav_version")
     implementation("androidx.navigation:navigation-ui:$nav_version")
-
-    // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    //Room
+    implementation ("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor ("androidx.room:room-compiler:$roomVersion")
+    ksp ("androidx.room:room-compiler:$roomVersion")
+    implementation ("androidx.room:room-ktx:$roomVersion")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
+
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
+
+    //RXjava
+    implementation ("io.reactivex.rxjava2:rxjava:2.2.21")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+
+    //Palette
+    implementation ("androidx.palette:palette-ktx:1.0.0")
+
+    //Preference
+    implementation ("androidx.preference:preference-ktx:1.2.0")
+
+
 
 }

@@ -22,15 +22,9 @@ class SearchHomeFragment : Fragment() {
     private lateinit var viewModel: SearchHomeViewModel
     private val categoryAdapter = CategoryAdapter(arrayListOf())
 
-
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -51,12 +45,8 @@ class SearchHomeFragment : Fragment() {
         binding.categoryListRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.categoryListRecyclerView.adapter = categoryAdapter
 
-
-
         observeLiveData()
     }
-
-
 
 
 
@@ -65,15 +55,20 @@ class SearchHomeFragment : Fragment() {
             categories?.let {
                 binding.categoryListRecyclerView.visibility = View.VISIBLE
                 categoryAdapter.updateCategoryList(categories)
+
             }
 
         })
         viewModel.categoryError.observe(viewLifecycleOwner, Observer { error->
             error?.let {
                 if(it) {
-                   // categoryError.visibility = View.VISIBLE
+
+
+                    //  binding.countryError.visibility = View.VISIBLE
+
                 } else {
                    // categoryError.visibility = View.GONE
+
                 }
             }
         })
@@ -83,4 +78,8 @@ class SearchHomeFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
