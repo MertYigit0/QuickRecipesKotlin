@@ -3,7 +3,10 @@ package com.mertyigit0.quickrecipeskotlin.model
 import com.google.gson.annotations.SerializedName
 
 
-
+data class CategoriesResponse(
+    @SerializedName("categories")
+    val categories: List<CategoriesModel>
+)
 
 data class CategoriesModel(
 
