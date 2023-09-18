@@ -32,4 +32,12 @@ class CategoryAdapter(val categoryList : ArrayList<CategoriesModel>):RecyclerVie
 
 
     }
+
+    fun updateCategoryList(newCategoryList:List<CategoriesModel>){
+        categoryList.clear()
+        categoryList.addAll(newCategoryList)
+        notifyDataSetChanged()
+    }
+
+
 }

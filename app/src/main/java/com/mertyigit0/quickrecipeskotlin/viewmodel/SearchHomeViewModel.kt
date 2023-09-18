@@ -7,5 +7,20 @@ import com.mertyigit0.quickrecipeskotlin.model.CategoriesModel
 class SearchHomeViewModel : ViewModel() {
 
     val categories = MutableLiveData<List<CategoriesModel>>()
-    val countryError = MutableLiveData<Boolean>()
+    val categoryError = MutableLiveData<Boolean>()
+
+
+    fun refreshData(){
+        val category = CategoriesModel(1,"Beef", "https://www.themealdb.com/images/category/beef.png" ,"Beef is ths")
+        val categor1 = CategoriesModel(2,"chicken", "https://www.themealdb.com/images/category/beef.png" ,"chickcihicken")
+
+    val categoryList = arrayListOf<CategoriesModel>(category,categor1)
+        categories.value= categoryList
+        categoryError.value = false
+
+
+    }
+
+
+
 }
