@@ -3,6 +3,7 @@ package com.mertyigit0.quickrecipeskotlin.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mertyigit0.quickrecipeskotlin.R
 import com.mertyigit0.quickrecipeskotlin.model.CategoriesModel
@@ -25,6 +26,7 @@ class CategoryAdapter(val categoryList : ArrayList<CategoriesModel>):RecyclerVie
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+        holder.view.findViewById<TextView>(R.id.itemCategoryText).text = categoryList[position].strCategory
 
 
 
