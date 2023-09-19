@@ -25,17 +25,10 @@ class SearchHomeViewModel : ViewModel() {
 /*
         val category = CategoriesModel("1","Beef", "https://www.themealdb.com/images/category/beef.png" ,"Beef is ths")
         val categor1 = CategoriesModel("2","chicken", "https://www.themealdb.com/images/category/beef.png" ,"chickcihicken")
-        val category3 = CategoriesModel("1","Beef", "https://www.themealdb.com/images/category/beef.png" ,"Beef is ths")
-        val categor4 = CategoriesModel("2","chicken", "https://www.themealdb.com/images/category/beef.png" ,"chickcihicken")
-        val category2 = CategoriesModel("1","Beef", "https://www.themealdb.com/images/category/beef.png" ,"Beef is ths")
-        val categor5 = CategoriesModel("2","chicken", "https://www.themealdb.com/images/category/beef.png" ,"chickcihicken")
-        val category6 = CategoriesModel("1","Beef", "https://www.themealdb.com/images/category/beef.png" ,"Beef is ths")
-        val categor7 = CategoriesModel("2","chicken", "https://www.themealdb.com/images/category/beef.png" ,"chickcihicken")
 
-    val categoryList = arrayListOf<CategoriesModel>(category,categor1,category2,categor5,categor4,category3,categor7,category6)
+    val categoryList = arrayListOf<CategoriesModel>(category,categor1)
         categories.value= categoryList
         categoryError.value = false
-
  */
 
 
@@ -67,12 +60,7 @@ class SearchHomeViewModel : ViewModel() {
 
                 })
 
-
-
-
         )
-
-
 
     }
 

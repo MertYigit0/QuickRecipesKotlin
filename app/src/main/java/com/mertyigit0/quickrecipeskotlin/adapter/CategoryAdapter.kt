@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mertyigit0.quickrecipeskotlin.R
 import com.mertyigit0.quickrecipeskotlin.model.CategoriesModel
 
-class CategoryAdapter(val categoryList : ArrayList<CategoriesModel>):RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(val categoryList : ArrayList<CategoriesModel>)
+    :RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     class CategoryViewHolder(var view : View) : RecyclerView.ViewHolder(view) {
 
     }
@@ -27,8 +28,6 @@ class CategoryAdapter(val categoryList : ArrayList<CategoriesModel>):RecyclerVie
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.view.findViewById<TextView>(R.id.itemCategoryText).text = categoryList[position].strCategory
-
-
 
 
     }
