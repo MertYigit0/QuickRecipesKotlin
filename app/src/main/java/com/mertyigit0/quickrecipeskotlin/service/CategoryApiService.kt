@@ -16,7 +16,12 @@ class CategoryApiService {
         .create(CategoryAPI::class.java)
 
     fun getData(): Single<List<CategoriesModel>> {
-        return api.getCategories()
+
+
+       /* return api.getCategories()
             .map { response -> response.categories }
+
+        */
+        return Single.just(emptyList())
     }
 }

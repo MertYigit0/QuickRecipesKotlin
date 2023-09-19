@@ -1,4 +1,4 @@
-package com.mertyigit0.quickrecipeskotlin
+package com.mertyigit0.quickrecipeskotlin.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mertyigit0.quickrecipeskotlin.adapter.CategoryAdapter

@@ -7,7 +7,64 @@
 
     <fragment
         android:id="@+id/searchHomeFragment"
-        android:name="com.mertyigit0.quickrecipeskotlin.SearchHomeFragment"
+        android:name="com.mertyigit0.quickrecipeskotlin.view.SearchHomeFragment"
         android:label="fragment_search_home"
-        tools:layout="@layout/fragment_search_home" />
+        tools:layout="@layout/fragment_search_home" >
+        <action
+            android:id="@+id/action_searchHomeFragment_to_shareMyRecipesFragment"
+            app:destination="@id/shareMyRecipesFragment" />
+        <action
+            android:id="@+id/action_searchHomeFragment_to_recipeFeedFragment"
+            app:destination="@id/recipeFeedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.mertyigit0.quickrecipeskotlin.view.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_shareMyRecipesFragment"
+            app:destination="@id/shareMyRecipesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insideCategoryFragment"
+        android:name="com.mertyigit0.quickrecipeskotlin.view.InsideCategoryFragment"
+        android:label="fragment_inside_category"
+        tools:layout="@layout/fragment_inside_category" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.mertyigit0.quickrecipeskotlin.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeFeedFragment"
+        android:name="com.mertyigit0.quickrecipeskotlin.view.RecipeFeedFragment"
+        android:label="fragment_recipe_feed"
+        tools:layout="@layout/fragment_recipe_feed" >
+        <action
+            android:id="@+id/action_recipeFeedFragment_to_searchHomeFragment"
+            app:destination="@id/searchHomeFragment" />
+        <action
+            android:id="@+id/action_recipeFeedFragment_to_insideCategoryFragment"
+            app:destination="@id/insideCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareMyRecipesFragment"
+        android:name="com.mertyigit0.quickrecipeskotlin.view.ShareMyRecipesFragment"
+        android:label="fragment_share_my_recipes"
+        tools:layout="@layout/fragment_share_my_recipes" >
+        <action
+            android:id="@+id/action_shareMyRecipesFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_shareMyRecipesFragment_to_searchHomeFragment"
+            app:destination="@id/searchHomeFragment" />
+    </fragment>
 </navigation>

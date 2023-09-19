@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="RecipeFeed"
+        android:id="@+id/recipeFeed"
+        android:icon="@drawable/baseline_home_24"/>
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="SearchHome"
+        android:id="@+id/searchHome"
+        android:icon="@drawable/baseline_search_24"/>
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="ShareRecipe"
+        android:id="@+id/shareRecipe"
+        android:icon="@drawable/baseline_add_circle_outline_24"/>
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Favorites"
+        android:id="@+id/favorites"
+        android:icon="@drawable/baseline_favorite_24"/>
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Profile"
+        android:id="@+id/profile"
+        android:icon="@drawable/baseline_person_24"/>
+</menu>
