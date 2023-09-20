@@ -20,7 +20,7 @@ data class CategoriesModel(
     @SerializedName("idCategory")
     var idCategory : String? ,
 
-    @PrimaryKey
+
     @ColumnInfo(name = "strCategory")
     @SerializedName("strCategory")
     var strCategory : String ,
@@ -31,6 +31,10 @@ data class CategoriesModel(
 
     @ColumnInfo(name = "strCategoryDescription")
     @SerializedName("strCategoryDescription")
-    val strCategoryDescription: String?
+    val strCategoryDescription: String?,
+
+
+    @PrimaryKey ( autoGenerate = true)
+        var uuid : Int = 0
 
 )

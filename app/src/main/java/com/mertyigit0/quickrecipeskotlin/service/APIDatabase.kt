@@ -10,7 +10,7 @@ import com.mertyigit0.quickrecipeskotlin.model.CategoriesModel
 import com.mertyigit0.quickrecipeskotlin.model.MealModel
 
 
-@Database(entities = arrayOf(CategoriesModel::class,MealModel::class), version = 1)
+@Database(entities = arrayOf(CategoriesModel::class,MealModel::class), version = 3)
 abstract class APIDatabase : RoomDatabase() {
 
     abstract fun categoryDao() : CategoryDAO

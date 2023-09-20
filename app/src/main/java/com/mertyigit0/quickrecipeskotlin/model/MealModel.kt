@@ -15,7 +15,7 @@ data class MealResponse(
 
 @Entity(tableName = "meals")
 data class MealModel(
-    @PrimaryKey
+
     @ColumnInfo(name = "idMeal")
     @SerializedName("idMeal")
     val idMeal: String,
@@ -26,5 +26,8 @@ data class MealModel(
 
     @ColumnInfo(name = "strMealThumb")
     @SerializedName("strMealThumb")
-    val strMealThumb: String?
+    val strMealThumb: String?,
+
+    @PrimaryKey ( autoGenerate = true)
+    var uuid : Int = 0
 )

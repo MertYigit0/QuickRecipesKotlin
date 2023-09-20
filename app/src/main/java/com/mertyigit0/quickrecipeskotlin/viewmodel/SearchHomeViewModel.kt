@@ -26,31 +26,22 @@ class SearchHomeViewModel(application: Application) :BaseViewModel(application) 
     private  var customSharedPreferences = CustomSharedPreferences(getApplication())
     private  var refreshTime = 1000 *10 * 60 * 1000 *1000 *1000L //10k minute
 
-    fun refreshData(){
-/*
-        val category = CategoriesModel("1","Beef", "https://www.themealdb.com/images/category/beef.png" ,"Beef is ths")
-        val categor1 = CategoriesModel("2","chicken", "https://www.themealdb.com/images/category/beef.png" ,"chickcihicken")
-
-    val categoryList = arrayListOf<CategoriesModel>(category,categor1)
-        categories.value= categoryList
-        categoryError.value = false
- */
-
-
+    fun refreshData() {
         val updateTime = customSharedPreferences.getTime()
-        if(updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime){
+        if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime) {
             getDataFromSQLite()
-        }else{
+        } else {
             getDataFromAPI()
         }
-
-
     }
+
 
     private  fun getDataFromSQLite(){
         launch {
             val categories = APIDatabase(getApplication()).categoryDao().getAllCategories()
-            showCategories(categories)
+
+                showCategories(categories)
+
             Toast.makeText(getApplication(),"SQLite",Toast.LENGTH_LONG).show()
         }
     }
@@ -90,10 +81,11 @@ class SearchHomeViewModel(application: Application) :BaseViewModel(application) 
             val dao = APIDatabase(getApplication()).categoryDao()
             dao.deleteAllCategories()
             val insertedIds = dao.insertAll(*list.toTypedArray())
-
+            var i = 0
             // Dönen kimlik sütunlarını doğrudan CategoriesModel nesnelerine atayın
-            for (i in insertedIds.indices) {
-                list[i].strCategory = insertedIds[i].toString()
+            while (i < list.size) {
+                list[i].uuid = insertedIds[i].toInt()
+                i = i + 1
             }
 
             showCategories(list)
@@ -102,7 +94,11 @@ class SearchHomeViewModel(application: Application) :BaseViewModel(application) 
     }
 
 
+    override fun onCleared() {
+        super.onCleared()
 
+        disposable.clear()
+    }
 
 
 
