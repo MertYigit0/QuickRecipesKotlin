@@ -46,6 +46,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     val nav_version = "2.7.2"
     val roomVersion = "2.5.2"
     val  lifecycle_version = "2.6.1"
@@ -92,6 +93,8 @@ dependencies {
     //Preference
     implementation ("androidx.preference:preference-ktx:1.2.0")
 
+    //swipeRefresh
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
 
 }
