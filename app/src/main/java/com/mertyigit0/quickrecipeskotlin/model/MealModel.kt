@@ -1,5 +1,8 @@
 package com.mertyigit0.quickrecipeskotlin.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 
@@ -10,12 +13,18 @@ data class MealResponse(
 )
 
 
+@Entity(tableName = "meals")
 data class MealModel(
+    @PrimaryKey
+    @ColumnInfo(name = "idMeal")
+    @SerializedName("idMeal")
+    val idMeal: String,
+
+    @ColumnInfo(name = "strMeal")
     @SerializedName("strMeal")
     val strMeal: String?,
-    @SerializedName("strMealThumb")
-    val strMealThumb: String?,
-    @SerializedName("idMeal")
-    val idMeal: String?,
 
+    @ColumnInfo(name = "strMealThumb")
+    @SerializedName("strMealThumb")
+    val strMealThumb: String?
 )
