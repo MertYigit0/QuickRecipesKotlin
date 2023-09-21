@@ -1,5 +1,6 @@
 package com.mertyigit0.quickrecipeskotlin.viewmodel
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
@@ -24,7 +25,7 @@ class SearchHomeViewModel(application: Application) :BaseViewModel(application) 
     private  val disposable = CompositeDisposable()
 
     private  var customSharedPreferences = CustomSharedPreferences(getApplication())
-    private  var refreshTime = 1000 *10 * 60 * 1000 *1000 *1000L //10k minute
+    private  var refreshTime = 10_000L * 60 * 1_000_000_000L
 
     fun refreshData() {
         val updateTime = customSharedPreferences.getTime()
@@ -36,6 +37,7 @@ class SearchHomeViewModel(application: Application) :BaseViewModel(application) 
     }
 
 
+    @SuppressLint("SuspiciousIndentation")
     private  fun getDataFromSQLite(){
         launch {
             val categories = APIDatabase(getApplication()).categoryDao().getAllCategories()
