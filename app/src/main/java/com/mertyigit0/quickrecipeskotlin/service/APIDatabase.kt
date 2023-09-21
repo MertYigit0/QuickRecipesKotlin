@@ -7,14 +7,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.mertyigit0.quickrecipeskotlin.model.CategoriesModel
+import com.mertyigit0.quickrecipeskotlin.model.MealDetailModel
 import com.mertyigit0.quickrecipeskotlin.model.MealModel
 
 
-@Database(entities = arrayOf(CategoriesModel::class,MealModel::class), version = 3)
+@Database(entities = arrayOf(CategoriesModel::class,MealModel::class,MealDetailModel::class), version = 5)
 abstract class APIDatabase : RoomDatabase() {
 
     abstract fun categoryDao() : CategoryDAO
     abstract  fun mealDao() : MealDAO
+
+    abstract  fun mealDetailDao() : MealDetailDAO
+
+
 
     companion object {
 

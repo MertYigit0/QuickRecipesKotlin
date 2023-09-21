@@ -36,7 +36,7 @@ class InsideCategoryViewModel(application: Application) : BaseViewModel(applicat
 
 
     private fun getDataFromAPI() {
-        val categoryName = "Seafood"
+        val categoryName = "Dessert"
             //selectedCategory ?: return // Eğer kategori adı null ise, işlemi sonlandır.
 
         disposable.add(

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/recipeFeedFragment">
+    app:startDestination="@id/mealDetailFragment">
 
     <fragment
         android:id="@+id/searchHomeFragment"
@@ -36,7 +36,11 @@
         android:id="@+id/insideCategoryFragment"
         android:name="com.mertyigit0.quickrecipeskotlin.view.InsideCategoryFragment"
         android:label="fragment_inside_category"
-        tools:layout="@layout/fragment_inside_category" />
+        tools:layout="@layout/fragment_inside_category" >
+        <action
+            android:id="@+id/action_insideCategoryFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.mertyigit0.quickrecipeskotlin.view.ProfileFragment"
@@ -54,9 +58,6 @@
         <action
             android:id="@+id/action_recipeFeedFragment_to_searchHomeFragment"
             app:destination="@id/searchHomeFragment" />
-        <action
-            android:id="@+id/action_recipeFeedFragment_to_insideCategoryFragment"
-            app:destination="@id/insideCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/shareMyRecipesFragment"
@@ -70,4 +71,9 @@
             android:id="@+id/action_shareMyRecipesFragment_to_searchHomeFragment"
             app:destination="@id/searchHomeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mealDetailFragment"
+        android:name="com.mertyigit0.quickrecipeskotlin.view.MealDetailFragment"
+        android:label="fragment_meal_detail"
+        tools:layout="@layout/fragment_meal_detail" />
 </navigation>
