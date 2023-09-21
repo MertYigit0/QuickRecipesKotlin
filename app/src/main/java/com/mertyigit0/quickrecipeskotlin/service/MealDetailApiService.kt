@@ -9,8 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MealDetailApiService {
 
-
-
     private val BASE_URL = "https://www.themealdb.com/"
     private val api = Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -19,11 +17,8 @@ class MealDetailApiService {
         .build()
         .create(MealDetailAPI::class.java)
 
-
-    fun getData(idMeal :String): Single<List<MealDetailModel>> {
+    fun getData(idMeal: String): Single<MealDetailModel> {
         return api.getMealDeatilbyID(idMeal)
-            .map { response -> response.mealDetails }
-        //return Single.just(emptyList())
+            .map { response -> response.mealDetails.first() }
     }
-
 }
