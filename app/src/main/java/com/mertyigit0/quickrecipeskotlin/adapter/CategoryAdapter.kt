@@ -35,7 +35,7 @@ class CategoryAdapter(val categoryList : ArrayList<CategoriesModel>)
         holder.view.findViewById<TextView>(R.id.itemCategoryText).text = categoryList[position].strCategory
 
         holder.view.setOnClickListener {
-            val action = SearchHomeFragmentDirections.actionSearchHomeFragmentToInsideCategoryFragment()
+            val action = SearchHomeFragmentDirections.actionSearchHomeFragmentToInsideCategoryFragment(categoryList[position].strCategory)
             Navigation.findNavController(it).navigate(action)
 
 

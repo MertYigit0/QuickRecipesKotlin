@@ -40,6 +40,14 @@ class InsideCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments.let {
+           var strCategory = it?.let { it1 -> InsideCategoryFragmentArgs.fromBundle(it1).strCategory }
+            if (strCategory != null) {
+                viewModel = ViewModelProvider(this)[InsideCategoryViewModel::class.java]
+                viewModel.setSelectedCategory(strCategory)
+            }
+        }
+
         viewModel = ViewModelProvider(this)[InsideCategoryViewModel::class.java]
         viewModel.refreshData()
 
