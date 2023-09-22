@@ -20,7 +20,7 @@ class MealDetailFragment : Fragment() {
     private val binding get() = _binding!!;
 
     private  lateinit var  viewModel: MealDetailViewModel
-    private  var mealDetail = ""
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,12 +41,16 @@ class MealDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-         //   mealDetail = MealDetailFragmentArgs.fromBundle(it)
+         var  idMeal = it?.let { it1 -> MealDetailFragmentArgs.fromBundle(it1).idMeal }
+            if (idMeal != null){
+                viewModel = ViewModelProvider(this)[MealDetailViewModel::class.java]
+                viewModel.setSelectedMeal(idMeal)
+            }
         }
 
 
          viewModel = ViewModelProvider(this)[MealDetailViewModel::class.java]
-        viewModel.getData( "52959")
+        viewModel.refreshData()
         observeLiveData()
 
     }

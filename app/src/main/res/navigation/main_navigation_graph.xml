@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/mealDetailFragment">
+    app:startDestination="@id/recipeFeedFragment">
 
     <fragment
         android:id="@+id/searchHomeFragment"
@@ -79,9 +79,18 @@
         android:id="@+id/mealDetailFragment"
         android:name="com.mertyigit0.quickrecipeskotlin.view.MealDetailFragment"
         android:label="fragment_meal_detail"
-        tools:layout="@layout/fragment_meal_detail" />
+        tools:layout="@layout/fragment_meal_detail" >
+        <argument
+            android:name="idMeal"
+            app:argType="string"
+            android:defaultValue="a"/>
+    </fragment>
     <argument
         android:name= "strCategory"
         app:argType="string"
         android:defaultValue="a" />
+    <argument
+        android:name="idMeal"
+        app:argType="string"
+        android:defaultValue="a"/>
 </navigation>
