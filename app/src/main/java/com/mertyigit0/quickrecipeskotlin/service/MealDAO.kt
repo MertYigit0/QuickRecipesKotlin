@@ -22,4 +22,9 @@ interface MealDAO {
     @Query("DELETE FROM meals")
     suspend fun deleteAllMeal()
 
+
+    @Query("SELECT * FROM meals WHERE category = :categoryName")
+    suspend fun getMealsByCategory(categoryName: String): List<MealModel>
+
+
 }

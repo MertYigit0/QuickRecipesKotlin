@@ -5,6 +5,7 @@ import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mertyigit0.quickrecipeskotlin.model.CategoriesModel
 import com.mertyigit0.quickrecipeskotlin.model.MealModel
 import com.mertyigit0.quickrecipeskotlin.service.APIDatabase
@@ -43,15 +44,28 @@ class InsideCategoryViewModel(application: Application) : BaseViewModel(applicat
     }
 
     @SuppressLint("SuspiciousIndentation")
-    private  fun getDataFromSQLite(){
-        launch {
 
-            val meals = APIDatabase(getApplication()).mealDao().getAllMeals()
-            showMeals(meals)
+    private fun getDataFromSQLite() {
+        viewModelScope.launch {
+            selectedCategory?.let { categoryName ->
+                val dao = APIDatabase(getApplication()).mealDao()
+                val existingMeals = dao.getMealsByCategory(categoryName)
 
-            Toast.makeText(getApplication(),"SQLite", Toast.LENGTH_LONG).show()
+                if (existingMeals.isNotEmpty()) {
+                    // Veriler mevcutsa göster
+                    showMeals(existingMeals)
+                    Toast.makeText(getApplication(), "SQLite", Toast.LENGTH_LONG).show()
+                } else {
+                    // Veriler daha önce çekilmedi veya boş, API'den çek
+                    getDataFromAPI()
+                }
+            }
         }
     }
+
+
+
+
 
 
 
@@ -60,19 +74,19 @@ class InsideCategoryViewModel(application: Application) : BaseViewModel(applicat
     }
 
 
+
     private fun getDataFromAPI() {
-
-
-        val categoryName = selectedCategory ?: return // Eğer kategori adı null ise, işlemi sonlandır.
-
+        val categoryName = selectedCategory ?: return
         disposable.add(
             mealApiService.getData(categoryName)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<MealModel>>() {
                     override fun onSuccess(t: List<MealModel>) {
+                        // Kategori bilgisini yemeklere ekleyin
+                        t.forEach { it.category = categoryName }
                         storeInSQLite(t)
-                        Toast.makeText(getApplication(),"API",Toast.LENGTH_LONG).show()
+                        Toast.makeText(getApplication(), "API category inside", Toast.LENGTH_LONG).show()
                     }
 
                     override fun onError(e: Throwable) {

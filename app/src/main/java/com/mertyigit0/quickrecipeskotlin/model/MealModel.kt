@@ -29,5 +29,10 @@ data class MealModel(
     val strMealThumb: String?,
 
     @PrimaryKey ( autoGenerate = true)
-    var uuid : Int = 0
+    var uuid : Int = 0,
+
+    @ColumnInfo(name = "category")
+    @SerializedName("category")
+    var category: String?
+
 )
