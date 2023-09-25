@@ -21,10 +21,11 @@ class InsideCategoryViewModel(application: Application) : BaseViewModel(applicat
 
     val meals = MutableLiveData<List<MealModel>>()
     val mealError = MutableLiveData<Boolean>()
-    private var selectedCategory: String? = null
 
     private  val mealApiService = MealApiService()
     private  val disposable = CompositeDisposable()
+
+    private var selectedCategory: String? = null
 
     private  var customSharedPreferences = CustomSharedPreferences(getApplication())
     private  var refreshTime = 10_000L * 60 * 1_000_000_000L
@@ -54,7 +55,7 @@ class InsideCategoryViewModel(application: Application) : BaseViewModel(applicat
                 if (existingMeals.isNotEmpty()) {
                     // Veriler mevcutsa göster
                     showMeals(existingMeals)
-                    Toast.makeText(getApplication(), "SQLite inside", Toast.LENGTH_LONG).show()
+                    Toast.makeText(getApplication(), "SQLite inside", Toast.LENGTH_SHORT).show()
                 } else {
                     // Veriler daha önce çekilmedi veya boş, API'den çek
                     getDataFromAPI()
@@ -86,7 +87,7 @@ class InsideCategoryViewModel(application: Application) : BaseViewModel(applicat
                         // Kategori bilgisini yemeklere ekleyin
                         t.forEach { it.category = categoryName }
                         storeInSQLite(t)
-                        Toast.makeText(getApplication(), "API category inside", Toast.LENGTH_LONG).show()
+                        Toast.makeText(getApplication(), "API category inside", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onError(e: Throwable) {

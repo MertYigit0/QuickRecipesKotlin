@@ -12,11 +12,11 @@ import com.mertyigit0.quickrecipeskotlin.model.MealModel
 interface MealDetailDAO {
 
     @Insert
-    suspend fun  insertMealDeteail(mealdetail : MealDetailModel)
+    suspend fun  insertMealDetail(mealdetail : MealDetailModel)
     @Update
-    suspend fun  updateMealDeteail(mealdetail : MealDetailModel)
+    suspend fun  updateMealDetail(mealdetail : MealDetailModel)
     @Delete
-    suspend fun  deleteMealDeteail(mealdetail : MealDetailModel)
+    suspend fun  deleteMealDetail(mealdetail : MealDetailModel)
 
     @Query("SELECT * FROM meals")
     suspend fun getAllMeals(): List<MealDetailModel>
