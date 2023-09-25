@@ -54,7 +54,7 @@ class InsideCategoryViewModel(application: Application) : BaseViewModel(applicat
                 if (existingMeals.isNotEmpty()) {
                     // Veriler mevcutsa göster
                     showMeals(existingMeals)
-                    Toast.makeText(getApplication(), "SQLite", Toast.LENGTH_LONG).show()
+                    Toast.makeText(getApplication(), "SQLite inside", Toast.LENGTH_LONG).show()
                 } else {
                     // Veriler daha önce çekilmedi veya boş, API'den çek
                     getDataFromAPI()
@@ -107,21 +107,26 @@ private fun showMeals(mealList : List<MealModel>){
 
 
 
-    private fun storeInSQLite(list : List<MealModel>){
-    launch {
-        val dao = APIDatabase(getApplication()).mealDao()
-        dao.deleteAllMeal()
-        val instertIds = dao.insertALL(*list.toTypedArray())
-        var i = 0
-        while (i<list.size){
-            list[i].uuid = instertIds[i].toInt()
-            i = i +1
-        }
-        showMeals(list)
-    }
-        customSharedPreferences.saveTime(System.nanoTime())
+    private fun storeInSQLite(list: List<MealModel>) {
+        launch {
+            val dao = APIDatabase(getApplication()).mealDao()
 
+            // Mevcut verileri silmek yerine yeni verileri ekleyin
+            val insertIds = dao.insertALL(*list.toTypedArray())
+
+            // insertALL işlemi sonucunda oluşturulan yeni veri kimliklerini alın
+            var i = 0
+            while (i < list.size) {
+                list[i].uuid = insertIds[i].toInt()
+                i++
+            }
+
+            // Verileri göster
+            showMeals(list)
+        }
+        customSharedPreferences.saveTime(System.nanoTime())
     }
+
 
 
 
