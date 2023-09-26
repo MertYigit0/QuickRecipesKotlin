@@ -21,7 +21,7 @@ interface MealDetailDAO {
     @Query("SELECT * FROM meals")
     suspend fun getAllMeals(): List<MealDetailModel>
 
-    @Query("SELECT * FROM meals WHERE idMeal = :mealId")
+    @Query("SELECT * FROM mealdetails WHERE idMeal = :mealId")
     suspend fun getMealById(mealId: String): MealDetailModel?
 
 

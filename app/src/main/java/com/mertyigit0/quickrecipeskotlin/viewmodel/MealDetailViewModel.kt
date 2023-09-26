@@ -36,8 +36,7 @@ class MealDetailViewModel(application: Application) : BaseViewModel(application)
     val updateTime = customSharedPreferences.getTime()
     if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime)
     {
-       // getDataFromSQLite()
-        getDataFromAPI()
+        getDataFromSQLite()
 
     } else
     {
@@ -51,12 +50,9 @@ class MealDetailViewModel(application: Application) : BaseViewModel(application)
 
         }
 
-    fun getDataFromSQLite() {
-        val mealId = selectedMeal ?: return
-
+    private fun getDataFromSQLite() {
         viewModelScope.launch {
-            selectedMeal?.let {
-                mealId->
+            selectedMeal?.let { mealId ->
                 val dao = APIDatabase(getApplication()).mealDetailDao()
                 val mealDetail = dao.getMealById(mealId)
 
@@ -64,40 +60,42 @@ class MealDetailViewModel(application: Application) : BaseViewModel(application)
                     // Veri SQLite'dan geldi, göster
                     showMeals(mealDetail)
                     Toast.makeText(getApplication(), "Sqlite detail", Toast.LENGTH_SHORT).show()
-
                 } else {
                     // Veri daha önce çekilmedi veya boş, API'den çek
                     getDataFromAPI()
                 }
             }
-            }
-
+        }
     }
 
 
 
-    fun getDataFromAPI() {
 
-            val mealName = selectedMeal ?: return
 
-            disposable.add(
-                mealDetailApiService.getData(mealName)
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(object : DisposableSingleObserver<MealDetailModel>() {
-                        override fun onSuccess(t: MealDetailModel) {
-                            mealDetailLiveData.value = t
-                            storeInSQLite(t)
-                            Toast.makeText(getApplication(), "API detail", Toast.LENGTH_SHORT).show()
-                        }
 
-                        override fun onError(e: Throwable) {
-                            val errorMessage = "Hata oluştu: ${e.message}"
-                            println(errorMessage)
-                        }
-                    })
-            )
-        }
+
+    private fun getDataFromAPI() {
+        val mealName = selectedMeal ?: return
+
+        disposable.add(
+            mealDetailApiService.getData(mealName)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<MealDetailModel>() {
+                    override fun onSuccess(t: MealDetailModel) {
+                        //mealDetailLiveData.value = t
+                        storeInSQLite(t) // API'den gelen veriyi SQLite'a kaydet
+                        Toast.makeText(getApplication(), "API detail", Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onError(e: Throwable) {
+                        val errorMessage = "Hata oluştu: ${e.message}"
+                        println(errorMessage)
+                    }
+                })
+        )
+    }
+
 
     private fun showMeals(mealList : MealDetailModel){
         mealDetailLiveData.value  = mealList
@@ -120,7 +118,11 @@ class MealDetailViewModel(application: Application) : BaseViewModel(application)
     }
 
 
+    override fun onCleared() {
+        super.onCleared()
 
+        disposable.clear()
+    }
 
 
 
