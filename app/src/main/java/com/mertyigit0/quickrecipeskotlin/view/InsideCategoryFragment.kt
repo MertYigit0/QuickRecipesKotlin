@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mertyigit0.quickrecipeskotlin.R
 import com.mertyigit0.quickrecipeskotlin.adapter.CategoryAdapter
@@ -51,7 +52,7 @@ class InsideCategoryFragment : Fragment() {
         viewModel = ViewModelProvider(this)[InsideCategoryViewModel::class.java]
         viewModel.refreshData()
 
-        binding.mealListRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.mealListRecyclerView.layoutManager =  GridLayoutManager(context, 2) // 2 sütunlu bir düzen
         binding.mealListRecyclerView.adapter = mealAdapter
 
         observeLiveData()
