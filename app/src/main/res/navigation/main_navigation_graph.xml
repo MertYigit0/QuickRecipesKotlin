@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_favoritesFragment_to_shareMyRecipesFragment"
             app:destination="@id/shareMyRecipesFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_loginFragment2"
+            app:destination="@id/loginFragment2" />
     </fragment>
     <fragment
         android:id="@+id/insideCategoryFragment"
@@ -53,6 +56,9 @@
         <action
             android:id="@+id/action_profileFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment2"
+            app:destination="@id/loginFragment2" />
     </fragment>
     <fragment
         android:id="@+id/recipeFeedFragment"
@@ -62,6 +68,9 @@
         <action
             android:id="@+id/action_recipeFeedFragment_to_searchHomeFragment"
             app:destination="@id/searchHomeFragment" />
+        <action
+            android:id="@+id/action_recipeFeedFragment_to_loginFragment2"
+            app:destination="@id/loginFragment2" />
     </fragment>
     <fragment
         android:id="@+id/shareMyRecipesFragment"
@@ -74,6 +83,9 @@
         <action
             android:id="@+id/action_shareMyRecipesFragment_to_searchHomeFragment"
             app:destination="@id/searchHomeFragment" />
+        <action
+            android:id="@+id/action_shareMyRecipesFragment_to_loginFragment2"
+            app:destination="@id/loginFragment2" />
     </fragment>
     <fragment
         android:id="@+id/mealDetailFragment"
@@ -93,4 +105,20 @@
         android:name="idMeal"
         app:argType="string"
         android:defaultValue="a"/>
+    <fragment
+        android:id="@+id/loginFragment2"
+        android:name="com.mertyigit0.quickrecipeskotlin.LoginRegister.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment2_to_registerFragment2"
+            app:destination="@id/registerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment2"
+        android:name="com.mertyigit0.quickrecipeskotlin.LoginRegister.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment2_to_loginFragment2"
+            app:destination="@id/loginFragment2" />
+    </fragment>
 </navigation>
