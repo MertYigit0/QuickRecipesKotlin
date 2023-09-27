@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/recipeFeedFragment">
+    app:startDestination="@id/youShouldLoginFragment">
 
     <fragment
         android:id="@+id/searchHomeFragment"
@@ -122,6 +122,15 @@
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_registerFragment2_to_loginFragment2"
+            app:destination="@id/loginFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/youShouldLoginFragment"
+        android:name="com.mertyigit0.quickrecipeskotlin.LoginRegister.YouShouldLoginFragment"
+        android:label="fragment_you_should_login"
+        tools:layout="@layout/fragment_you_should_login" >
+        <action
+            android:id="@+id/action_youShouldLoginFragment_to_loginFragment2"
             app:destination="@id/loginFragment2" />
     </fragment>
 </navigation>
