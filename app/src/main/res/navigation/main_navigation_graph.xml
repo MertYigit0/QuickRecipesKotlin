@@ -112,6 +112,9 @@
         <action
             android:id="@+id/action_loginFragment2_to_registerFragment2"
             app:destination="@id/registerFragment2" />
+        <action
+            android:id="@+id/action_loginFragment2_to_recipeFeedFragment"
+            app:destination="@id/recipeFeedFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment2"

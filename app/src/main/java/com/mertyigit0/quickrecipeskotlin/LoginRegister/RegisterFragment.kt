@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -38,7 +39,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val navController = Navigation.findNavController(requireView())
 
 
        binding.registerButton.setOnClickListener{
@@ -59,6 +60,7 @@ class RegisterFragment : Fragment() {
                            // Kayıt başarılı
                            Toast.makeText(requireContext(), "Registration successful.", Toast.LENGTH_SHORT).show()
                            // İsterseniz burada giriş ekranına yönlendirebilirsiniz.
+                           navController.navigate(R.id.action_registerFragment2_to_loginFragment2)
                        } else {
                            // Kayıt başarısız
                            Toast.makeText(requireContext(), "Registration failed. Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

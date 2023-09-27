@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -40,6 +41,40 @@ class LoginFragment : Fragment() {
         val navController = Navigation.findNavController(requireView())
 
         binding.loginButton.setOnClickListener{
+            val email = binding.loginEmailEditText.text.toString()
+            val password = binding.editTextPassword.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                // E-posta veya şifre boşsa kullanıcıya uyarı ver
+                Toast.makeText(requireContext(), "Lütfen e-posta ve şifreyi doldurun", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (password.length < 6) {
+                // Şifre en az 6 karakter olmalı
+                Toast.makeText(requireContext(), "Şifre en az 6 karakter olmalı", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
+            auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {task ->
+                if (task.isSuccessful) {
+                    // Giriş başarılı ise yapılacak işlemler
+                    // Örneğin, ana ekrana geçiş yapabilirsiniz
+                  navController.navigate(R.id.action_loginFragment2_to_recipeFeedFragment)
+                } else {
+                    // Giriş başarısız ise kullanıcıya hata mesajı gösterebilirsiniz
+                    Toast.makeText(requireContext(), "Giriş başarısız: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+
+
+
+
+            }
+
+
+
+
 
         }
 
