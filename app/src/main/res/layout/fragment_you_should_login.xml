@@ -4,28 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginRegister.YouShouldLoginFragment">
+    tools:context=".LoginRegister.YouShouldLoginFragment"
+    android:background="@color/bej"
+
+
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:layout_width="315dp"
-        android:layout_height="145dp"
-        android:text="Log in now to access these and many other features and improve your app experience!"
+        android:layout_width="354dp"
+        android:layout_height="100dp"
+        android:text="Login or Register now to access these and many other features and improve your app experience!"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295" />
+        app:layout_constraintVertical_bias="0.437"
+        android:textColor="@color/brown"/>
 
     <Button
         android:id="@+id/loginNowButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="230dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/orange"
         android:text="Login or Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.59" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
