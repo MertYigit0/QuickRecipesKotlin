@@ -61,7 +61,7 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Giriş başarılı ise yapılacak işlemler
                     // Örneğin, ana ekrana geçiş yapabilirsiniz
-                  navController.navigate(R.id.action_loginFragment2_to_recipeFeedFragment)
+                  navController.navigate(R.id.action_loginFragment_to_recipeFeedFragment)
                 } else {
                     // Giriş başarısız ise kullanıcıya hata mesajı gösterebilirsiniz
                     Toast.makeText(requireContext(), "Giriş başarısız: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
@@ -79,7 +79,7 @@ class LoginFragment : Fragment() {
         }
 
         binding.registerNowText.setOnClickListener{
-            navController.navigate(R.id.action_loginFragment2_to_registerFragment2)
+            navController.navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
 

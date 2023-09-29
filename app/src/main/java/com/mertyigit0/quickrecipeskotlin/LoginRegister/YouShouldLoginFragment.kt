@@ -37,7 +37,7 @@ class YouShouldLoginFragment : Fragment() {
 
         binding.loginNowButton.setOnClickListener{
 
-            navController.navigate(R.id.action_youShouldLoginFragment_to_loginFragment2)
+            navController.navigate(R.id.action_youShouldLoginFragment_to_loginFragment)
 
 
         }

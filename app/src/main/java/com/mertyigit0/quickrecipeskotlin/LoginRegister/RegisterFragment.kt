@@ -60,7 +60,7 @@ class RegisterFragment : Fragment() {
                            // Kayıt başarılı
                            Toast.makeText(requireContext(), "Registration successful.", Toast.LENGTH_SHORT).show()
                            // İsterseniz burada giriş ekranına yönlendirebilirsiniz.
-                           navController.navigate(R.id.action_registerFragment2_to_loginFragment2)
+                           navController.navigate(R.id.action_registerFragment_to_loginFragment)
                        } else {
                            // Kayıt başarısız
                            Toast.makeText(requireContext(), "Registration failed. Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
