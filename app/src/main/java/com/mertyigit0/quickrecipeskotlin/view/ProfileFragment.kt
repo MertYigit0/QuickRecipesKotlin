@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.mertyigit0.quickrecipeskotlin.MainActivity
 import com.mertyigit0.quickrecipeskotlin.R
 import com.mertyigit0.quickrecipeskotlin.databinding.FragmentProfileBinding
 import com.mertyigit0.quickrecipeskotlin.viewmodel.LoginCheckViewModel
@@ -25,11 +26,12 @@ class ProfileFragment : Fragment() {
 
    // private  val auth = FirebaseAuth.getInstance()
 
-    private lateinit var viewModelLoginCheck: LoginCheckViewModel
+    private lateinit var viewModel: LoginCheckViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModelLoginCheck = ViewModelProvider(requireActivity()).get(LoginCheckViewModel::class.java)
+        // MainActivity içinde oluşturulan Singleton ViewModel'e erişim
+        viewModel = (requireActivity() as MainActivity).viewModelLoginCheck
 
     }
 
@@ -42,14 +44,17 @@ class ProfileFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        viewModelLoginCheck.isLoggedIn.observe(viewLifecycleOwner, Observer { isLoggedIn ->
-            if (isLoggedIn){
+        // Giriş durumunu dinle
+        viewModel.isLoggedIn.observe(viewLifecycleOwner, Observer { isLoggedIn ->
+            if (isLoggedIn) {
+                // Kullanıcı giriş yapmış
                 Toast.makeText(requireContext(), "Hello to your profile", Toast.LENGTH_LONG).show()
-            }
-            else{
+            } else {
+                // Kullanıcı giriş yapmamış, yönlendirme yapabilirsiniz
                 findNavController().navigate(R.id.youShouldLoginFragment)
             }
         })
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

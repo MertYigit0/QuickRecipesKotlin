@@ -18,10 +18,14 @@ class LoginCheckViewModel : ViewModel() {
         }
     }
 
-    private fun checkLoginStatus() {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        _isLoggedIn.value = currentUser != null
+    companion object {
+        private var instance: LoginCheckViewModel? = null
+
+        fun getInstance(): LoginCheckViewModel {
+            if (instance == null) {
+                instance = LoginCheckViewModel()
+            }
+            return instance as LoginCheckViewModel
+        }
     }
-
-
 }
