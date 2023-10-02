@@ -13,12 +13,19 @@
          <action
             android:id="@+id/action_searchHomeFragment_to_insideCategoryFragment"
             app:destination="@id/insideCategoryFragment" />
-    </fragment>
+         <action
+             android:id="@+id/action_searchHomeFragment_to_youShouldLoginFragment"
+             app:destination="@id/youShouldLoginFragment" />
+     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.mertyigit0.quickrecipeskotlin.view.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_youShouldLoginFragment"
+            app:destination="@id/youShouldLoginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/insideCategoryFragment"
         android:name="com.mertyigit0.quickrecipeskotlin.view.InsideCategoryFragment"
@@ -36,17 +43,29 @@
         android:id="@+id/profileFragment"
         android:name="com.mertyigit0.quickrecipeskotlin.view.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_youShouldLoginFragment"
+            app:destination="@id/youShouldLoginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recipeFeedFragment"
         android:name="com.mertyigit0.quickrecipeskotlin.view.RecipeFeedFragment"
         android:label="fragment_recipe_feed"
-        tools:layout="@layout/fragment_recipe_feed" />
+        tools:layout="@layout/fragment_recipe_feed" >
+        <action
+            android:id="@+id/action_recipeFeedFragment_to_youShouldLoginFragment"
+            app:destination="@id/youShouldLoginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/shareMyRecipesFragment"
         android:name="com.mertyigit0.quickrecipeskotlin.view.ShareMyRecipesFragment"
         android:label="fragment_share_my_recipes"
-        tools:layout="@layout/fragment_share_my_recipes" />
+        tools:layout="@layout/fragment_share_my_recipes" >
+        <action
+            android:id="@+id/action_shareMyRecipesFragment_to_youShouldLoginFragment"
+            app:destination="@id/youShouldLoginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mealDetailFragment"
         android:name="com.mertyigit0.quickrecipeskotlin.view.MealDetailFragment"
@@ -95,5 +114,20 @@
         <action
             android:id="@+id/action_youShouldLoginFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_youShouldLoginFragment_to_recipeFeedFragment"
+            app:destination="@id/recipeFeedFragment" />
+        <action
+            android:id="@+id/action_youShouldLoginFragment_to_searchHomeFragment"
+            app:destination="@id/searchHomeFragment" />
+        <action
+            android:id="@+id/action_youShouldLoginFragment_to_shareMyRecipesFragment"
+            app:destination="@id/shareMyRecipesFragment" />
+        <action
+            android:id="@+id/action_youShouldLoginFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_youShouldLoginFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

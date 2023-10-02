@@ -22,18 +22,26 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         navController = Navigation.findNavController(this, R.id.fragmentContainerView)
-       // NavigationUI.setupWithNavController(bottomNavigationView,navController)
-        bottomNavigationView.setupWithNavController(navController)
-        // MainActivity içinde Singleton ViewModel'i oluştur
-        viewModelLoginCheck = LoginCheckViewModel.getInstance()
+
+        // BottomNavigationView ile ilişkilendirme
+        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+
+
 
 
 
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        // MainActivity içinde Singleton ViewModel'i oluştur
+        viewModelLoginCheck = LoginCheckViewModel.getInstance()
+
+    }
+
     override fun onSupportNavigateUp(): Boolean {
-        // ActionBar'da geri tuşunu kullanarak doğru şekilde geri gitmek için NavController'ı kullanın
-        return NavigationUI.navigateUp(navController, null) || super.onSupportNavigateUp()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
