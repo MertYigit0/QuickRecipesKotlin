@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         navController = Navigation.findNavController(this, R.id.fragmentContainerView)
-        NavigationUI.setupWithNavController(bottomNavigationView,navController)
-
+       // NavigationUI.setupWithNavController(bottomNavigationView,navController)
+        bottomNavigationView.setupWithNavController(navController)
         // MainActivity içinde Singleton ViewModel'i oluştur
         viewModelLoginCheck = LoginCheckViewModel.getInstance()
 

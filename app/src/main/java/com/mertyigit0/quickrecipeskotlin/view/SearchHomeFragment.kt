@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.mertyigit0.quickrecipeskotlin.R
 import com.mertyigit0.quickrecipeskotlin.adapter.CategoryAdapter
 import com.mertyigit0.quickrecipeskotlin.databinding.FragmentSearchHomeBinding
 import com.mertyigit0.quickrecipeskotlin.viewmodel.SearchHomeViewModel
@@ -45,6 +48,25 @@ class SearchHomeFragment : Fragment() {
         binding.categoryListRecyclerView.adapter = categoryAdapter
 
         observeLiveData()
+
+        binding.b1.setOnClickListener{
+            val navController = view?.findNavController()
+            navController?.navigate(R.id.recipeFeedFragment)
+
+        }
+        binding.b2.setOnClickListener{
+            val navController = view?.findNavController()
+            navController?.navigate(R.id.shareMyRecipesFragment)
+        }
+        binding.b3.setOnClickListener{
+            val navController = view?.findNavController()
+            navController?.navigate(R.id.favoritesFragment)
+
+        }
+        binding.b4.setOnClickListener{
+            val navController = view?.findNavController()
+            navController?.navigate(R.id.profileFragment)
+        }
     }
 
 
