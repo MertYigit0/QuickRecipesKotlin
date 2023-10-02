@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.mertyigit0.quickrecipeskotlin.MainActivity
@@ -61,19 +62,27 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
-
-
-
         binding.DoLogin.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
-
-
+        }
+        binding.b1.setOnClickListener{
+            val navController = view?.findNavController()
+            navController?.navigate(R.id.recipeFeedFragment)
 
         }
+        binding.b2.setOnClickListener{
+            val navController = view?.findNavController()
+            navController?.navigate(R.id.shareMyRecipesFragment)
+        }
+        binding.b3.setOnClickListener{
+            val navController = view?.findNavController()
+            navController?.navigate(R.id.favoritesFragment)
 
-
+        }
+        binding.b4.setOnClickListener{
+            val navController = view?.findNavController()
+            navController?.navigate(R.id.profileFragment)
+        }
 
     }
 
