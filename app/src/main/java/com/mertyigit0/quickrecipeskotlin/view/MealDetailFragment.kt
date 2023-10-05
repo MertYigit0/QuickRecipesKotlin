@@ -41,23 +41,21 @@ class MealDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-         var  idMeal = it?.let { it1 -> MealDetailFragmentArgs.fromBundle(it1).idMeal }
-            if (idMeal != null){
+            val idMeal = MealDetailFragmentArgs.fromBundle(it).idMeal
+            if (idMeal != null) {
                 viewModel = ViewModelProvider(this)[MealDetailViewModel::class.java]
                 viewModel.setSelectedMeal(idMeal)
-                addFavoritesButtonClicked(idMeal )
+                binding.addFavoritesButton.setOnClickListener {
+                    addFavoritesButtonClicked(idMeal)
+                }
             }
         }
 
-
-         viewModel = ViewModelProvider(this)[MealDetailViewModel::class.java]
+        viewModel = ViewModelProvider(this)[MealDetailViewModel::class.java]
         viewModel.refreshData()
         observeLiveData()
-
-
-
-
     }
+
 
     private  fun observeLiveData(){
         viewModel.mealDetailLiveData.observe(viewLifecycleOwner, Observer { mealDetails ->

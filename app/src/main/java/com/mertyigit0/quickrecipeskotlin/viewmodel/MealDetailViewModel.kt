@@ -36,8 +36,9 @@ class MealDetailViewModel(application: Application) : BaseViewModel(application)
 
 
     private val auth = FirebaseAuth.getInstance()
-    private val firestore = FirebaseFirestore.getInstance()
-    private val usersCollection = firestore.collection("users")
+    // Firestore referansı
+    private val db = FirebaseFirestore.getInstance()
+
 
 
     fun refreshData(){
@@ -133,24 +134,37 @@ class MealDetailViewModel(application: Application) : BaseViewModel(application)
         disposable.clear()
     }
 
-    fun addFavoriteMeal(mealId: String) {
+    fun addFavoriteMeal(idMeal: String) {
         // Kullanıcının UID'sini al
-        val userId = auth.currentUser?.uid ?: return
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
 
-        // Kullanıcının belgesini al veya oluştur
-        val userDoc = usersCollection.document(userId)
+        // Kullanıcı UID'si varsa işleme devam et
+        userId?.let {
+            // "users" koleksiyonu referansı
+            val usersCollection = db.collection("users")
 
-        // Favori yemekleri temsil eden bir alan ekleyin (örneğin, "favoriteMeals")
-        // Bu alanda bir dizi veya liste kullanılabilir
-        userDoc.update("favoriteMeals", FieldValue.arrayUnion(mealId))
-            .addOnSuccessListener {
-                // Başarıyla eklendi
-            }
-            .addOnFailureListener { e ->
-                // Hata durumu
-            }
+            // Kullanıcının UID'siyle belirtilen bir doküman referansı
+            val userDocument = usersCollection.document(it)
+
+            // Favorite koleksiyonu referansı
+            val favoritesCollection = userDocument.collection("favorites")
+
+            // FieldValue.arrayUnion kullanarak mevcut favorilere idMeal ekleyin
+            favoritesCollection
+                .document("favoriteDocument") // Doküman adını belirleyebilirsiniz
+                .update("idMeals", FieldValue.arrayUnion(idMeal))
+                .addOnSuccessListener {
+                    // Başarılı bir şekilde güncellendi
+                    Toast.makeText(getApplication(), "Favorilere başarıyla eklendi: $idMeal", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    // Hata durumunda buraya düşer
+                    Toast.makeText(getApplication(), "Favorilere eklenirken hata oluştu: $e", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
 
-    }
+
+}
 

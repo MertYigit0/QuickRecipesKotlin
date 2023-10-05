@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-     //   setupObservers()
+        setupObservers()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
