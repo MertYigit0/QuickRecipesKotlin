@@ -5,6 +5,9 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import com.mertyigit0.quickrecipeskotlin.model.MealDetailModel
 import com.mertyigit0.quickrecipeskotlin.model.MealModel
 import com.mertyigit0.quickrecipeskotlin.service.APIDatabase
@@ -29,6 +32,12 @@ class MealDetailViewModel(application: Application) : BaseViewModel(application)
 
     private var customSharedPreferences = CustomSharedPreferences(getApplication())
     private var refreshTime = 10_000L * 60 * 1_000_000_000L
+
+
+
+    private val auth = FirebaseAuth.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
+    private val usersCollection = firestore.collection("users")
 
 
     fun refreshData(){
@@ -124,7 +133,23 @@ class MealDetailViewModel(application: Application) : BaseViewModel(application)
         disposable.clear()
     }
 
+    fun addFavoriteMeal(mealId: String) {
+        // Kullanıcının UID'sini al
+        val userId = auth.currentUser?.uid ?: return
 
+        // Kullanıcının belgesini al veya oluştur
+        val userDoc = usersCollection.document(userId)
+
+        // Favori yemekleri temsil eden bir alan ekleyin (örneğin, "favoriteMeals")
+        // Bu alanda bir dizi veya liste kullanılabilir
+        userDoc.update("favoriteMeals", FieldValue.arrayUnion(mealId))
+            .addOnSuccessListener {
+                // Başarıyla eklendi
+            }
+            .addOnFailureListener { e ->
+                // Hata durumu
+            }
+    }
 
 
     }

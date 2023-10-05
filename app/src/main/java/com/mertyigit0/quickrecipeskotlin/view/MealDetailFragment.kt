@@ -45,6 +45,7 @@ class MealDetailFragment : Fragment() {
             if (idMeal != null){
                 viewModel = ViewModelProvider(this)[MealDetailViewModel::class.java]
                 viewModel.setSelectedMeal(idMeal)
+                addFavoritesButtonClicked(idMeal )
             }
         }
 
@@ -52,6 +53,9 @@ class MealDetailFragment : Fragment() {
          viewModel = ViewModelProvider(this)[MealDetailViewModel::class.java]
         viewModel.refreshData()
         observeLiveData()
+
+
+
 
     }
 
@@ -71,6 +75,11 @@ class MealDetailFragment : Fragment() {
             }
         })
     }
+
+    private fun addFavoritesButtonClicked(idMeal : String ){
+        viewModel.addFavoriteMeal(idMeal)
+    }
+
 
 
     override fun onDestroyView() {
