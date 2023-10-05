@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        setupObservers()
+     //   setupObservers()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,6 +78,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupObservers() {
+
         // Giriş durumunu dinle
         viewModel.isLoggedIn.observe(viewLifecycleOwner, Observer { isLoggedIn ->
             if (isLoggedIn) {

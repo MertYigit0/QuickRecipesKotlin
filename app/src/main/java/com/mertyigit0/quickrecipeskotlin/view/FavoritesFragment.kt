@@ -39,6 +39,18 @@ class FavoritesFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+
+       // setupObservers()
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
+    private fun setupObservers() {
+
         // Giriş durumunu dinle
         viewModel.isLoggedIn.observe(viewLifecycleOwner, Observer { isLoggedIn ->
             if (isLoggedIn) {
@@ -51,32 +63,6 @@ class FavoritesFragment : Fragment() {
         })
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.DoLogin.setOnClickListener{
-            FirebaseAuth.getInstance().signOut()
-        }
-        binding.b1.setOnClickListener{
-            val navController = view?.findNavController()
-            navController?.navigate(R.id.recipeFeedFragment)
-
-        }
-        binding.b2.setOnClickListener{
-            val navController = view?.findNavController()
-            navController?.navigate(R.id.shareMyRecipesFragment)
-        }
-        binding.b3.setOnClickListener{
-            val navController = view?.findNavController()
-            navController?.navigate(R.id.favoritesFragment)
-
-        }
-        binding.b4.setOnClickListener{
-            val navController = view?.findNavController()
-            navController?.navigate(R.id.profileFragment)
-        }
-
-    }
 
 
 }

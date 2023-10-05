@@ -39,16 +39,7 @@ class ShareMyRecipesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // Giriş durumunu dinle
-        viewModel.isLoggedIn.observe(viewLifecycleOwner, Observer { isLoggedIn ->
-            if (isLoggedIn) {
-                // Kullanıcı giriş yapmış
-                Toast.makeText(requireContext(), "Hello to your profile", Toast.LENGTH_LONG).show()
-            } else {
-                // Kullanıcı giriş yapmamış, yönlendirme yapabilirsiniz
-                findNavController().navigate(R.id.youShouldLoginFragment)
-            }
-        })
+     //setupObservers()
 
     }
 
@@ -77,6 +68,20 @@ class ShareMyRecipesFragment : Fragment() {
             navController?.navigate(R.id.profileFragment)
         }
     }
+    private fun setupObservers() {
+
+        // Giriş durumunu dinle
+        viewModel.isLoggedIn.observe(viewLifecycleOwner, Observer { isLoggedIn ->
+            if (isLoggedIn) {
+                // Kullanıcı giriş yapmış
+                Toast.makeText(requireContext(), "Hello to your profile", Toast.LENGTH_LONG).show()
+            } else {
+                // Kullanıcı giriş yapmamış, yönlendirme yapabilirsiniz
+                findNavController().navigate(R.id.youShouldLoginFragment)
+            }
+        })
+    }
+
 
 
 }

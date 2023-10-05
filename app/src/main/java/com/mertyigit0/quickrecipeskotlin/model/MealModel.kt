@@ -33,6 +33,11 @@ data class MealModel(
 
     @ColumnInfo(name = "category")
     @SerializedName("category")
-    var category: String?
+    var category: String?,
+
+    @ColumnInfo(name = "favorite")
+    @SerializedName("favorite")
+    var favorite: Boolean?
+
 
 )

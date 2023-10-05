@@ -15,6 +15,9 @@ data class MealDetailResponse(
 
 @Entity(tableName = "mealdetails")
 data class MealDetailModel(
+    @ColumnInfo(name = "favorite")
+    @SerializedName("favorite")
+    var favorite: Boolean?,
 
     @SerializedName("idMeal")
     val idMeal: String?,

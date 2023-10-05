@@ -25,6 +25,13 @@
         <action
             android:id="@+id/action_favoritesFragment_to_youShouldLoginFragment"
             app:destination="@id/youShouldLoginFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment" />
+        <argument
+            android:name= "strCategory"
+            app:argType="string"
+            android:defaultValue="a" />
     </fragment>
     <fragment
         android:id="@+id/insideCategoryFragment"
