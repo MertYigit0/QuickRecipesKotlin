@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mertyigit0.quickrecipeskotlin.model.MealDetailModel
@@ -135,34 +136,78 @@ class MealDetailViewModel(application: Application) : BaseViewModel(application)
     }
 
     fun addFavoriteMeal(idMeal: String) {
-        // Kullanıcının UID'sini al
+        // Mevcut kullanıcının UID'sini al
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-
         // Kullanıcı UID'si varsa işleme devam et
         userId?.let {
+            // Firestore referansını al
+            val db = FirebaseFirestore.getInstance()
+
             // "users" koleksiyonu referansı
             val usersCollection = db.collection("users")
 
             // Kullanıcının UID'siyle belirtilen bir doküman referansı
             val userDocument = usersCollection.document(it)
 
-            // Favorite koleksiyonu referansı
+            // "favorites" koleksiyonu referansı
             val favoritesCollection = userDocument.collection("favorites")
 
-            // FieldValue.arrayUnion kullanarak mevcut favorilere idMeal ekleyin
-            favoritesCollection
-                .document("favoriteDocument") // Doküman adını belirleyebilirsiniz
-                .update("idMeals", FieldValue.arrayUnion(idMeal))
-                .addOnSuccessListener {
-                    // Başarılı bir şekilde güncellendi
-                    Toast.makeText(getApplication(), "Favorilere başarıyla eklendi: $idMeal", Toast.LENGTH_SHORT).show()
+            // Kullanıcının dokümanını al ve varlık durumunu kontrol et
+            userDocument.get().addOnSuccessListener { userDocumentSnapshot ->
+                if (userDocumentSnapshot.exists()) {
+                    // Doküman varsa, "favorites" koleksiyonunu kontrol et
+                    checkAndAddFavorite(favoritesCollection, idMeal)
+                } else {
+                    // Doküman yoksa, oluştur ve "favorites" koleksiyonunu ekleyip idMeal'i eklemeyi dene
+                    usersCollection.document(it)
+                        .set(mapOf<String, Any>()) // Boş bir doküman oluştur
+                        .addOnSuccessListener {
+                            // Doküman başarıyla oluşturuldu, şimdi "favorites" koleksiyonunu ekleyip idMeal'i eklemeyi dene
+                            checkAndAddFavorite(favoritesCollection, idMeal)
+                        }
+                        .addOnFailureListener { e ->
+                            // Hata durumunda buraya düşer
+                            println("Doküman oluşturulurken hata oluştu: $e")
+                        }
                 }
-                .addOnFailureListener { e ->
-                    // Hata durumunda buraya düşer
-                    Toast.makeText(getApplication(), "Favorilere eklenirken hata oluştu: $e", Toast.LENGTH_SHORT).show()
-                }
+            }
         }
     }
+
+    // "favorites" koleksiyonunu kontrol et ve idMeal'i ekleyip eklemediğini kontrol et
+    private fun checkAndAddFavorite(favoritesCollection: CollectionReference, idMeal: String) {
+        // "favorites" koleksiyonu içinde belirtilen bir doküman referansı
+        val favoriteDocument = favoritesCollection.document("favoriteDocument")
+
+        // Koleksiyon içinde belirtilen bir dokümanın varlığını kontrol et
+        favoriteDocument.get().addOnSuccessListener { favoriteDocumentSnapshot ->
+            if (favoriteDocumentSnapshot.exists()) {
+                // Doküman varsa, idMeal'i koleksiyona ekle
+                favoriteDocument.update("idMeals", FieldValue.arrayUnion(idMeal))
+                    .addOnSuccessListener {
+                        // Başarılı bir şekilde güncellendi
+                        println("Favorilere başarıyla eklendi: $idMeal")
+                    }
+                    .addOnFailureListener { e ->
+                        // Hata durumunda buraya düşer
+                        println("Favorilere eklenirken hata oluştu: $e")
+                    }
+            } else {
+                // Doküman yoksa, oluştur ve idMeal'i ekle
+                favoriteDocument.set(mapOf("idMeals" to arrayListOf(idMeal)))
+                    .addOnSuccessListener {
+                        // Başarılı bir şekilde oluşturuldu
+                        println("Favorilere başarıyla eklendi: $idMeal")
+                    }
+                    .addOnFailureListener { e ->
+                        // Hata durumunda buraya düşer
+                        println("Favorilere eklenirken hata oluştu: $e")
+                    }
+            }
+        }
+    }
+
+
 
 
 
